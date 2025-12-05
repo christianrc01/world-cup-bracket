@@ -1,68 +1,222 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    /* World Cup 2026 Theme - Dark Navy & Gold */
+    --background: 216 50% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 216 45% 11%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 216 45% 11%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 43 69% 52%;
+    --primary-foreground: 216 50% 8%;
+
+    --secondary: 216 40% 16%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 216 35% 18%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 43 69% 52%;
+    --accent-foreground: 216 50% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 216 30% 20%;
+    --input: 216 30% 20%;
+    --ring: 43 69% 52%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --gold: 43 69% 52%;
+    --gold-light: 43 80% 65%;
+    --gold-dark: 43 60% 40%;
+    --navy: 216 50% 8%;
+    --navy-light: 216 45% 14%;
+    --navy-lighter: 216 40% 20%;
+    --surface: 216 45% 11%;
+    --surface-hover: 216 42% 14%;
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(43 69% 52%) 0%, hsl(43 80% 65%) 100%);
+    --gradient-navy: linear-gradient(180deg, hsl(216 50% 8%) 0%, hsl(216 45% 14%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(216 45% 13%) 0%, hsl(216 45% 9%) 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 8px hsl(216 50% 4% / 0.3);
+    --shadow-md: 0 4px 16px hsl(216 50% 4% / 0.4);
+    --shadow-lg: 0 8px 32px hsl(216 50% 4% / 0.5);
+    --shadow-gold: 0 4px 20px hsl(43 69% 52% / 0.2);
+
+    --sidebar-background: 216 50% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 43 69% 52%;
+    --sidebar-primary-foreground: 216 50% 8%;
+    --sidebar-accent: 216 40% 16%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 216 30% 20%;
+    --sidebar-ring: 43 69% 52%;
   }
-  a:hover {
-    color: #747bff;
+
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 216 50% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 216 50% 8%;
+    --primary: 43 69% 45%;
+    --primary-foreground: 0 0% 100%;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', system-ui, sans-serif;
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-md border border-border/50 rounded-xl;
+    box-shadow: var(--shadow-md);
+  }
+
+  .gold-gradient {
+    background: var(--gradient-gold);
+  }
+
+  .gold-text {
+    @apply text-transparent bg-clip-text;
+    background: var(--gradient-gold);
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .nav-link {
+    @apply relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transition-all duration-300;
+    transform: translateX(-50%);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    @apply w-full;
+  }
+
+  .nav-link.active {
+    @apply text-primary;
+  }
+
+  .match-input {
+    @apply w-12 h-10 text-center bg-secondary border border-border rounded-lg text-foreground font-semibold text-lg;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+    @apply transition-all duration-200;
+  }
+
+  .match-input:hover {
+    @apply border-primary/50;
+  }
+
+  .bracket-line {
+    @apply absolute bg-border;
+  }
+
+  .team-row {
+    @apply flex items-center gap-3 p-3 rounded-lg transition-all duration-200;
+  }
+
+  .team-row:hover {
+    @apply bg-secondary/50;
+  }
+
+  .position-badge {
+    @apply w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold;
+  }
+
+  .position-1, .position-2 {
+    @apply bg-primary/20 text-primary;
+  }
+
+  .position-3, .position-4 {
+    @apply bg-muted text-muted-foreground;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.5s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }
